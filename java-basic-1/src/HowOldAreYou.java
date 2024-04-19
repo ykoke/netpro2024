@@ -20,7 +20,11 @@ public class HowOldAreYou {
 			System.out.println("あなたは" + age + "歳ですね。");
 			System.out.println("あなたは10年後、" + (age + 10) + "歳ですね。");
             System.out.println("2030年の年齢は、"+(age + 6)+"歳ですね。");
-            
+            if(age>=0&&age<=5){
+				System.out.println();
+			} else if(age>=6&&age<=35){
+				System.out.println();
+			}
 		}
 		catch(IOException e) {
 			System.out.println(e);
