@@ -6,6 +6,71 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CSVReaderExample",
+            "request": "launch",
+            "mainClass": "CSVReaderExample",
+            "projectName": "java-basic-1_338ad804"
+        },
+        {
+            "type": "java",
+            "name": "StringOperationTest",
+            "request": "launch",
+            "mainClass": "StringOperationTest",
+            "projectName": "java-basic-1_338ad804"
+        },
+        {
+            "type": "java",
+            "name": "ArraysTest",
+            "request": "launch",
+            "mainClass": "ArraysTest",
+            "projectName": "java-basic-1_338ad804"
+        },
+        {
+            "type": "java",
+            "name": "StringBufferTest",
+            "request": "launch",
+            "mainClass": "StringBufferTest",
+            "projectName": "java-basic-1_338ad804"
+        },
+        {
+            "type": "java",
+            "name": "IfTest3",
+            "request": "launch",
+            "mainClass": "IfTest3",
+            "projectName": "java-basic-1_338ad804",
+            "args": [
+                "10"
+            ]
+        },
+        {
+            "type": "java",
+            "name": "IfTest2",
+            "request": "launch",
+            "mainClass": "IfTest2",
+            "projectName": "java-basic-1_338ad804",
+            "args": [
+                "5"
+            ]
+        },
+        {
+            "type": "java",
+            "name": "IfTest1",
+            "request": "launch",
+            "mainClass": "IfTest1",
+            "projectName": "java-basic-1_338ad804",
+            "args": [
+                "4"
+            ]
+        },
+        {
+            "type": "java",
+            "name": "IfTest0",
+            "request": "launch",
+            "mainClass": "IfTest0",
+            "projectName": "java-basic-1_338ad804"
+        },
+        {
+            "type": "java",
             "name": "HowOldAreYou",
             "request": "launch",
             "mainClass": "HowOldAreYou",

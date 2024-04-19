@@ -19,6 +19,8 @@ public class HowOldAreYou {
 			int age = Integer.parseInt(line);
 			System.out.println("あなたは" + age + "歳ですね。");
 			System.out.println("あなたは10年後、" + (age + 10) + "歳ですね。");
+            System.out.println("2030年の年齢は、"+(age + 6)+"歳ですね。");
+            
 		}
 		catch(IOException e) {
 			System.out.println(e);
