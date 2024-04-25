@@ -6,6 +6,27 @@
     "configurations": [
         {
             "type": "java",
+            "name": "DistrictExtractor",
+            "request": "launch",
+            "mainClass": "DistrictExtractor",
+            "projectName": "java-basic-1_338ad804"
+        },
+        {
+            "type": "java",
+            "name": "NetproLabMember",
+            "request": "launch",
+            "mainClass": "NetproLabMember",
+            "projectName": "java-basic-1_338ad804"
+        },
+        {
+            "type": "java",
+            "name": "NetprolabMember",
+            "request": "launch",
+            "mainClass": "NetprolabMember",
+            "projectName": "java-basic-1_338ad804"
+        },
+        {
+            "type": "java",
             "name": "CSVReaderExample",
             "request": "launch",
             "mainClass": "CSVReaderExample",
