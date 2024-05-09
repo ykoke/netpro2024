@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Random;
 
 public class HeikinCKadai {
@@ -38,41 +39,19 @@ public class HeikinCKadai {
 	}
 
 	void gokakusha(){
+		int h=0;
+		int[] hairetsu = new int[kamoku.length];
+		for(Kamoku k :kamoku){
+			hairetsu[h]=k.getScore();
+			h++;
+		}
+		Arrays.sort(hairetsu);
 		System.out.println("以下合格者の点数です。");
-		for(int i=0; i<N; i++){
-			//点数が80点以上なら合格
-			if(kamoku[i].getScore()>=80){
-				System.out.println(kamoku[i].getScore());
+		for(int num: hairetsu){
+			if(num>=80){
+				System.out.println(num);
 			}
-		}
-	}//student idと点数をソートしてだせ。＞＝８０以上
 
-	class Kamoku {
-		String name;
-		int score;
-		private int studentid;
-
-	
-		Kamoku(int s) {  // これがコンストラクタ。特殊なメソッド。クラス名と同じ。
-			score = s;
-		}
-	
-	// setScore というメソッドを定義する。
-	// score に値を設定する。
-		public void setScore(int num){
-			score = num;
-		}
-	
-	// getScore というメソッドを定義する。
-	// scoreを返す。
-		public int getScore() {
-			return score;
 		}
 	}
-	
-	// メソッド 関数のこと
-	//   public 返り値(戻り値return value) 関数名() {
-	//      中に具体的な処理を書く
-	//  }
-	
 }
