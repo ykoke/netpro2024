@@ -79,4 +79,10 @@ class RenshuTest {
         int[] c = { 1, 2 };
         assertFalse(renshu.swapTwoArrays(a, c)); // testing with different lengths
     }
+    @Test
+    void bubbleSort() {
+        int[] a = new int[]{5, 2, 3, 5, 4};
+        renshu.bubbleSort(a);
+        assertArrayEquals(new int[]{2, 3, 4, 5, 5}, a);
+        }
 }

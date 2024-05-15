@@ -5,7 +5,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Scanner;
 
-public class XmasServer {
+public class SalaryServer {
 
     private static final int times = 2;
 
@@ -36,17 +36,19 @@ public class XmasServer {
 
             ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
 
-            XmasPresent present = (XmasPresent) ois.readObject();// Integerクラスでキャスト。
+            SalaryPresent present = (SalaryPresent) ois.readObject();// Integerクラスでキャスト。
+            int daysalary = present.getDaysalary();
+            int workdays = present.getWorkdays();
 
             String msgPresent = present.getMessage();
             System.out.println("メッセージは" + msgPresent);
             String presentFromClient = present.getContent();
-            System.out.println("プレゼントの内容は" + presentFromClient);
+            System.out.println("勤務日数は" + presentFromClient);
 
             ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
 
-            XmasPresent response = new XmasPresent();
-            response.setMessage("サーバーです。メリークリスマス！\n" + presentFromClient + "ありがとう。\nプレゼントのお返しは" + times + "倍" + "です");
+            SalaryPresent response = new SalaryPresent();
+            response.setMessage(presentFromClient + "日間お疲れ様です。\nあなたの月収は" + daysalary*workdays+ "円" + "です。");
             response.setContent(serverProcess(presentFromClient));
 
             oos.writeObject(response);

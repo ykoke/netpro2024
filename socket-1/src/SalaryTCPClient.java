@@ -4,7 +4,7 @@ import java.net.BindException;
 import java.net.Socket; //ネットワーク関連のパッケージを利用する
 import java.util.Scanner;
 
-public class XmasTCPClient {
+public class SalaryTCPClient {
 
     public static void main(String arg[]) {
         try {
@@ -15,30 +15,32 @@ public class XmasTCPClient {
             Socket socket = new Socket("localhost", port);
             System.out.println("接続されました");
 
-            System.out.println("プレゼントを送ります");
+            System.out.println("あなたの今月のお給料を送ります。");
             ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
 
-            System.out.println("メッセージを入力してください(例:メリークリスマス) ↓");
+            System.out.println("日給を入力してください。↓");
             String message = scanner.next();
-            System.out.println("プレゼントの内容を入力してください(例:お菓子) ↓");
+            int daysalary = Integer.parseInt(message);
+            System.out.println("勤務日数を入力してください。 ↓");
             String content = scanner.next();
+            int workdays = Integer.parseInt(content);
             scanner.close();
 
-            XmasPresent present = new XmasPresent();
+            SalaryPresent present = new SalaryPresent();
             present.setMessage(message);
             present.setContent(content);
+            present.setDaysalary(daysalary);
+            present.setWorkdays(workdays);
 
             oos.writeObject(present);
             oos.flush();
 
             ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
 
-            XmasPresent okaeshiPresent = (XmasPresent) ois.readObject();
+            SalaryPresent okaeshiPresent = (SalaryPresent) ois.readObject();
 
             String replayMsg = okaeshiPresent.getMessage();
             System.out.println("サーバからのメッセージは" + replayMsg);
-            String replayContent = okaeshiPresent.getContent();
-            System.out.println(replayContent + "をもらいました！");
 
             ois.close();
             oos.close();

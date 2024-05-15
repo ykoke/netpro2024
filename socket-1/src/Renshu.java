@@ -90,4 +90,21 @@ class Renshu {
         }
         return true;
     }
+    public void bubbleSort(int[] a){
+        for (int i = a.length-1; i > 0; i-- ) {
+            // j は交換する箇所の前からの番号を示している
+            for (int j = 0; j < i; j++) {
+                if(a[j]>a[j+1]){
+                  //降順にしたい場合は不等号を逆に 
+                  int box = a[j];
+                  a[j] = a[j+1];
+                  a[j+1] = box;
+                  System.out.println(a[j] + ":" +a[j+1]);
+                } else{
+                  //そのまま
+                }
+            }
+        }
+    }
+    
 }
