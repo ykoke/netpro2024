@@ -5,7 +5,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Scanner;
 
-public class SalaryServer {
+public class TaskServerOnce {
 
     private static final int times = 2;
 
@@ -35,20 +35,17 @@ public class SalaryServer {
             System.out.println("接続しました。相手の入力を待っています......");
             ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
 
-            SalaryPresent present = (SalaryPresent) ois.readObject();// Integerクラスでキャスト。
-            int daysalary = present.getDaysalary();
-            int workdays = present.getWorkdays();
-
-            String msgPresent = present.getMessage();
-            System.out.println("メッセージは" + msgPresent);
-            String presentFromClient = present.getContent();
-            System.out.println("勤務日数は" + presentFromClient);
+            TaskObject object = (TaskObject) ois.readObject();// Integerクラスでキャスト。
+            int x = object.x;
+            System.out.println("数字は"+x);
 
             ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
 
-            SalaryPresent response = new SalaryPresent();
-            response.setMessage(presentFromClient + "日間お疲れ様です。\nあなたの月収は" + daysalary*workdays+ "円" + "です。");
-            response.setContent(serverProcess(presentFromClient));
+            TaskObject response = new TaskObject();
+            response.setExecNumber(x);
+            response.exec();
+            
+
 
             oos.writeObject(response);
             oos.flush();
@@ -72,3 +69,4 @@ public class SalaryServer {
         }
     }
 }
+

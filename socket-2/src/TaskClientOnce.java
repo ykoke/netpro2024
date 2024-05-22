@@ -4,7 +4,7 @@ import java.net.BindException;
 import java.net.Socket; //ネットワーク関連のパッケージを利用する
 import java.util.Scanner;
 
-public class SalaryTCPClient {
+public class TaskClientOnce {
 
     public static void main(String arg[]) {
         try {
@@ -14,30 +14,22 @@ public class SalaryTCPClient {
             System.out.println("localhostの" + port + "番ポートに接続を要求します");
             Socket socket = new Socket("localhost", port);
             System.out.println("接続されました");
-            System.out.println("あなたの今月のお給料を送ります。");
+            System.out.println("素数を計算します。");
             ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
-            System.out.println("日給を入力してください。↓");
-            String message = scanner.next();
-            int daysalary = Integer.parseInt(message);
-            System.out.println("勤務日数を入力してください。 ↓");
-            String content = scanner.next();
-            int workdays = Integer.parseInt(content);
+            System.out.println("数字を入力してください。↓");
+            int x = scanner.nextInt();
             scanner.close();
-            SalaryPresent present = new SalaryPresent();
-            present.setMessage(message);
-            present.setContent(content);
-            present.setDaysalary(daysalary);
-            present.setWorkdays(workdays);
+            TaskObject object = new TaskObject();
+            object.setExecNumber(x);
 
-            oos.writeObject(present);
+            oos.writeObject(object);
             oos.flush();
 
             ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
 
-            SalaryPresent okaeshiPresent = (SalaryPresent) ois.readObject();
-
-            String replayMsg = okaeshiPresent.getMessage();
-            System.out.println("サーバからのメッセージは" + replayMsg);
+            TaskObject okaeshiObject = (TaskObject) ois.readObject();
+            int replyx = okaeshiObject.getResult();
+            System.out.println("サーバからのメッセージは"+replyx);
 
             ois.close();
             oos.close();

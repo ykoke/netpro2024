@@ -5,7 +5,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Scanner;
 
-public class SalaryServer {
+public class TaskServerWhile {
 
     private static final int times = 2;
 
@@ -26,41 +26,35 @@ public class SalaryServer {
             Scanner scanner = new Scanner(System.in);
             System.out.print("ポートを入力してください(5000など) → ");
             int port = scanner.nextInt();
-            scanner.close();
             System.out.println("localhostの" + port + "番ポートで待機します");
             ServerSocket server = new ServerSocket(port); // ポート番号を指定し、クライアントとの接続の準備を行う
 
-            Socket socket = server.accept(); // クライアントからの接続要求を待ち、
-            // 要求があればソケットを取得し接続を行う
-            System.out.println("接続しました。相手の入力を待っています......");
-            ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
+            while (true) {
+                Socket socket = server.accept(); // クライアントからの接続要求を待ち、
+                // 要求があればソケットを取得し接続を行う
+                System.out.println("接続しました。相手の入力を待っています......");
+                ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
 
-            SalaryPresent present = (SalaryPresent) ois.readObject();// Integerクラスでキャスト。
-            int daysalary = present.getDaysalary();
-            int workdays = present.getWorkdays();
+                TaskObject object = (TaskObject) ois.readObject();// Integerクラスでキャスト。
+                int x = object.x;
+                System.out.println("数字は"+x);
 
-            String msgPresent = present.getMessage();
-            System.out.println("メッセージは" + msgPresent);
-            String presentFromClient = present.getContent();
-            System.out.println("勤務日数は" + presentFromClient);
+                ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
 
-            ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
+                TaskObject response = new TaskObject();
+                response.setExecNumber(x);
+                response.exec();
+                response.oneunder(x);
 
-            SalaryPresent response = new SalaryPresent();
-            response.setMessage(presentFromClient + "日間お疲れ様です。\nあなたの月収は" + daysalary*workdays+ "円" + "です。");
-            response.setContent(serverProcess(presentFromClient));
+                oos.writeObject(response);
+                oos.flush();
 
-            oos.writeObject(response);
-            oos.flush();
-
-            // close処理
-
-            ois.close();
-            oos.close();
-            // socketの終了。
-            socket.close();
-            server.close();
-
+                // close処理
+                ois.close();
+                oos.close();
+                // socketの終了。
+                socket.close();
+            }
         } // エラーが発生したらエラーメッセージを表示してプログラムを終了する
         catch (BindException be) {
             be.printStackTrace();
